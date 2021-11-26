@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 import joblib
 import numpy as np
 from rest_framework.response import Response
+import os
 
 
 
@@ -22,7 +23,10 @@ class HousepricingView(APIView):
                 toilets = data["toilets"]
                 bedrooms = data["bedrooms"]
                 location = data["location"]
-                mlM = joblib.load("housePricing.pkl")
+                
+                location_pkl = 'housepricingapi/api/ml_model/'
+                fullpath = os.path.join(location_pkl, 'housePricing.pkl')
+                mlM = joblib.load(fullpath)
                 print(mlM)
                 mlm_predict = mlM.predict([[bathrooms , serviced_price , new_price , estate_price , location_rank , exec_flag , terrace_flag , toilets , bedrooms , location]])
                 response_dict = {"response" : np.round(mlm_predict , decimals=2)}
