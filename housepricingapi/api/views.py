@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-import pickle
-import joblib
 import numpy as np
 from rest_framework.response import Response
+from django.conf import settings 
 
 
 
@@ -23,7 +22,7 @@ class HousepricingView(APIView):
                 toilets = data["toilets"]
                 bedrooms = data["bedrooms"]
                 location = data["location"]
-                mlM = joblib.load("https://housepricing-application.herokuapp.com/api/ml_model/housePricing.pkl")
+                mlM = getattr(settings, '../housePricing.pkl', 'the_default_value')
                 print(mlM)
                 mlm_predict = mlM.predict([[bathrooms , serviced_price , new_price , estate_price , location_rank , exec_flag , terrace_flag , toilets , bedrooms , location]])
                 response_dict = {"response" : np.round(mlm_predict , decimals=2)}
