@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
+import joblib
 import numpy as np
 from rest_framework.response import Response
-from django.conf import settings 
 
 
 
@@ -22,7 +22,7 @@ class HousepricingView(APIView):
                 toilets = data["toilets"]
                 bedrooms = data["bedrooms"]
                 location = data["location"]
-                mlM = getattr(settings, '../housePricing.pkl', 'the_default_value')
+                mlM = joblib.load("housePricing.pkl")
                 print(mlM)
                 mlm_predict = mlM.predict([[bathrooms , serviced_price , new_price , estate_price , location_rank , exec_flag , terrace_flag , toilets , bedrooms , location]])
                 response_dict = {"response" : np.round(mlm_predict , decimals=2)}
