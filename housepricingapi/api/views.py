@@ -3,7 +3,6 @@ from rest_framework.views import APIView
 import joblib
 import numpy as np
 from rest_framework.response import Response
-import os
 
 
 
@@ -23,7 +22,7 @@ class HousepricingView(APIView):
                 toilets = data["toilets"]
                 bedrooms = data["bedrooms"]
                 location = data["location"]
-                mlM = joblib.load("housePricing.pkl")
+                mlM = joblib.load("https://housepricingbackend.herokuapp.com/HousepricingBackend/housepricingapi/api/ml_model/housePricing.pkl")
                 print(mlM)
                 mlm_predict = mlM.predict([[bathrooms , serviced_price , new_price , estate_price , location_rank , exec_flag , terrace_flag , toilets , bedrooms , location]])
                 response_dict = {"response" : np.round(mlm_predict , decimals=2)}
