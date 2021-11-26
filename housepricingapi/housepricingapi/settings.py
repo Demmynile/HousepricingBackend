@@ -32,25 +32,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['https://housepricingserver.herokuapp.com']
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 
 
-CORS_ORIGIN_WHITELIST = (
-
-'https://housepricingserver.herokuapp.com',
-)
-
-
-ACCESS_CONTROL_ALLOW_ORIGIN = 'https://housepricingserver.herokuapp.com'
 
 
 
 
-CORS_ALLOWED_ORIGINS = [
-    "https://housepricingserver.herokuapp.com"
-]
+
+
+# CORS_ALLOWED_ORIGINS = [
+#     "https://housepricingserver.herokuapp.com"
+# ]
 # Application definition
 
 INSTALLED_APPS = [
